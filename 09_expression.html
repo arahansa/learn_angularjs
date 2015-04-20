@@ -1,0 +1,33 @@
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<div ng-app="myApp">
+    <div ng-app="myApp">
+    <div ng-controller="MainCtrl">
+        <p>Test 1: {{ main.test1.length > 0 && 'My data' || 'No data' }}</p>
+        <p>Test 2: {{ main.test2.length > 0 && 'My data' || 'No data' }}</p>
+    </div>
+</div>
+    <script src="assets/angularjs/angular.js"></script>
+    <script>
+      var myApp = angular.module('myApp', []);
+
+myApp.controller('MainCtrl', ['$scope', function ($scope) {
+
+    $scope.main = {};
+    
+    // No data
+    $scope.main.test1 = [];
+    
+    // We have data!
+    $scope.main.test2 = [{
+        "some": "data"
+    }];
+    
+}]);
+    </script>
+</div>
+</body>
+</html>

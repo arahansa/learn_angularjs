@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+    <div ng-controller="UserCtrl">
+        <p>{{ user.username }}</p>
+    </div>
+<!-- 
+{
+  "user": {
+    "name": "Todd Motto",
+    "id": "80138731"
+  }
+} 
+-->
+  
+    <script src="assets/angularjs/angular.js"></script>
+    <script>
+        myApp.controller('UserCtrl', ['$scope', '$http', function ($scope, $http) {
+
+          // 사용자 객체를 생성
+          $scope.user = {};
+
+          // 빈 문자열로 초기화
+          $scope.user.username = '';
+
+          // 서버에 사용자 이름을 요청
+          $http({
+            method: 'GET',
+            url: '//localhost:9000/someUrlForGettingUsername'
+          })
+          .success(function (data, status, headers, config) {
+            // 서버로부터 받아온 사용자 이름을 모델에 할당!
+            $scope.user.username = data.user.name;
+          })
+          .error(function (data, status, headers, config) {
+            // 이런. 뭔가 잘못되었음! :(
+          });
+        }]);
+    </script>
+</div>
+</body>
+</html>
